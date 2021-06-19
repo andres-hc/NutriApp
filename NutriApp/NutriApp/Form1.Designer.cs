@@ -35,7 +35,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.sexoCbx = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tallaTxt = new System.Windows.Forms.TextBox();
@@ -54,13 +54,15 @@
             this.plieguesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.plieguesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.diagCinturaTxt = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.estadoTxt = new System.Windows.Forms.TextBox();
             this.imcTxt = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnCalculo
@@ -123,19 +125,20 @@
             this.label9.TabIndex = 52;
             this.label9.Text = "Datos Antropométricos";
             // 
-            // comboBox1
+            // sexoCbx
             // 
-            this.comboBox1.DisplayMember = "--Seleccionar--";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.sexoCbx.DisplayMember = "--Seleccionar--";
+            this.sexoCbx.FormattingEnabled = true;
+            this.sexoCbx.Items.AddRange(new object[] {
+            "--Seleccionar--",
             "Masculino",
             "Femenino"});
-            this.comboBox1.Location = new System.Drawing.Point(196, 243);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(137, 24);
-            this.comboBox1.TabIndex = 51;
-            this.comboBox1.Tag = "";
-            this.comboBox1.Text = "--Seleccionar--";
+            this.sexoCbx.Location = new System.Drawing.Point(196, 243);
+            this.sexoCbx.Name = "sexoCbx";
+            this.sexoCbx.Size = new System.Drawing.Size(137, 24);
+            this.sexoCbx.TabIndex = 51;
+            this.sexoCbx.Tag = "";
+            this.sexoCbx.Text = "--Seleccionar--";
             // 
             // label8
             // 
@@ -287,13 +290,13 @@
             this.label14.TabIndex = 62;
             this.label14.Text = "Calculos";
             // 
-            // textBox4
+            // diagCinturaTxt
             // 
-            this.textBox4.Location = new System.Drawing.Point(923, 187);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(121, 22);
-            this.textBox4.TabIndex = 68;
+            this.diagCinturaTxt.Location = new System.Drawing.Point(923, 187);
+            this.diagCinturaTxt.Name = "diagCinturaTxt";
+            this.diagCinturaTxt.ReadOnly = true;
+            this.diagCinturaTxt.Size = new System.Drawing.Size(121, 22);
+            this.diagCinturaTxt.TabIndex = 68;
             // 
             // label15
             // 
@@ -313,13 +316,13 @@
             this.label16.TabIndex = 66;
             this.label16.Text = "Estado Nutricional";
             // 
-            // textBox10
+            // estadoTxt
             // 
-            this.textBox10.Location = new System.Drawing.Point(923, 159);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(121, 22);
-            this.textBox10.TabIndex = 65;
+            this.estadoTxt.Location = new System.Drawing.Point(923, 159);
+            this.estadoTxt.Name = "estadoTxt";
+            this.estadoTxt.ReadOnly = true;
+            this.estadoTxt.Size = new System.Drawing.Size(121, 22);
+            this.estadoTxt.TabIndex = 65;
             // 
             // imcTxt
             // 
@@ -339,15 +342,23 @@
             this.label17.TabIndex = 63;
             this.label17.Text = "IMC";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(110, 346);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.TabIndex = 69;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 450);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.diagCinturaTxt);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.estadoTxt);
             this.Controls.Add(this.imcTxt);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
@@ -358,7 +369,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.sexoCbx);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tallaTxt);
@@ -381,6 +392,7 @@
             this.Text = "NutriApp";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,7 +406,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox sexoCbx;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tallaTxt;
@@ -413,12 +425,13 @@
         private System.Windows.Forms.ToolStripMenuItem plieguesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem plieguesToolStripMenuItem2;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox diagCinturaTxt;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox estadoTxt;
         private System.Windows.Forms.TextBox imcTxt;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
