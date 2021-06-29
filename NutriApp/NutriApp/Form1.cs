@@ -17,131 +17,223 @@ namespace NutriApp
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cinturaTxt_KeyPress(object sender,
+          KeyPressEventArgs e)
         {
-            double peso = Convert.ToDouble(pesoTxt.Text);
-            double talla = Convert.ToDouble(tallaTxt.Text);
-            String cintura = Convert.ToString(cinturaTxt.Text);
-            double cefalico = Convert.ToDouble(cefalicoTxt.Text);
-
-            //Formula para calcular IMC
-            double imc = Math.Round(peso / (talla * talla), 2);
-            imcTxt.Text = Convert.ToString(imc);
-
-            //Formula para diagnosticas Estado Nutricional
-            double pI = 18.5;
-            double nPI = 18.49, nPF = 25, sPI = 24.99, sPF = 27, pOI = 26.99,
-                pOF = 30, o1I = 29.99, o1F = 35, o2I = 34.99, o2F = 40, o3I = 39.99, o3F = 50, o4I = 49.99;
-            String p = "Peso Insuficiente";
-            String n = "Normopeso";
-            String s = "Sobrepeso Grado I";
-            String pre = "Preobesidad";
-            String o1 = "Obesidad Tipo I";
-            String o2 = "Obesidad Tipo II";
-            String o3 = "Obesidad Tipo III";
-            String o4 = "Obesidad Tipo IV";
-
-
-            double imcD = Convert.ToDouble(imc);
-            if (pI > imcD)
+            //Para obligar a que sólo se introduzcan números
+            if (Char.IsDigit(e.KeyChar))
             {
-                estadoTxt.Text = p;
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso
+            {
+                e.Handled = false;
             }
             else
             {
-                if (imcD > nPI && imcD < nPF)
+                //el resto de teclas pulsadas se desactivan
+                e.Handled = true;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        //Validador solo numeros y ","
+        private void cinturaTxt_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 43) || (e.KeyChar >= 45 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("La cintura debe ser un entero o decimal separado por ',' Reintente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        //Validador solo numeros y ","
+        private void pesoTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 43) || (e.KeyChar >= 45 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("El peso debe ser un entero o decimal separado por ',' Reintente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        //Validador solo numeros y ","
+        private void tallaTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 43) || (e.KeyChar >= 45 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("La talla debe ser un entero o decimal separado por ',' Reintente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        //Validador solo numeros y "-"
+        private void rutTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 44) || (e.KeyChar >= 46 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("El rut solo permite el caracter '-' como separador de DV", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+        
+        //Validador solo numeros y ","
+        private void cefalicoTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 43) || (e.KeyChar >= 45 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("El P.Cefalico debe ser un entero o decimal separado por ',' Reintente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void BtnCalculo_Click(object sender, EventArgs e)
+        {
+            String ps = pesoTxt.Text;
+            String tll = tallaTxt.Text;
+            String cntr = cinturaTxt.Text;
+            String cflc = cefalicoTxt.Text;
+
+            if (ps.Trim() == "" || tll.Trim() == "" || cntr.Trim() == "" || cflc.Trim() == "")
+            {
+                MessageBox.Show("No ha completado todos los campos, por favor ingrese informacion solicitada", "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+                double peso = Convert.ToDouble(ps);
+                double talla = Convert.ToDouble(tll);
+                double cintura = Convert.ToDouble(cntr);
+                double cefalico = Convert.ToDouble(cflc);
+
+                //Formula para calcular IMC
+                double imc = Math.Round(peso / (talla * talla), 2);
+                imcTxt.Text = Convert.ToString(imc);
+
+                //Formula para diagnosticas Estado Nutricional
+                double pI = 18.5;
+                double nPI = 18.49, nPF = 25, sPI = 24.99, sPF = 27, pOI = 26.99,
+                    pOF = 30, o1I = 29.99, o1F = 35, o2I = 34.99, o2F = 40, o3I = 39.99, o3F = 50, o4I = 49.99;
+                String p = "Peso Insuficiente";
+                String n = "Normopeso";
+                String s = "Sobrepeso Grado I";
+                String pre = "Preobesidad";
+                String o1 = "Obesidad Tipo I";
+                String o2 = "Obesidad Tipo II";
+                String o3 = "Obesidad Tipo III";
+                String o4 = "Obesidad Tipo IV";
+
+
+                double imcD = Convert.ToDouble(imc);
+                if (pI > imcD)
                 {
-                    estadoTxt.Text = n;
+                    estadoTxt.Text = p;
                 }
                 else
                 {
-                    if (imcD > sPI && imcD < sPF)
+                    if (imcD > nPI && imcD < nPF)
                     {
-                        estadoTxt.Text = s;
+                        estadoTxt.Text = n;
                     }
                     else
                     {
-                        if (imcD > pOI && imcD < pOF)
+                        if (imcD > sPI && imcD < sPF)
                         {
-                            estadoTxt.Text = pre;
+                            estadoTxt.Text = s;
                         }
                         else
                         {
-                            if (imcD > o1I && imcD < o1F)
+                            if (imcD > pOI && imcD < pOF)
                             {
-                                estadoTxt.Text = o1;
+                                estadoTxt.Text = pre;
                             }
                             else
                             {
-                                if (imcD > o2I && imcD < o2F)
+                                if (imcD > o1I && imcD < o1F)
                                 {
-                                    estadoTxt.Text = o2;
+                                    estadoTxt.Text = o1;
                                 }
                                 else
                                 {
-                                    if (imcD > o3I && imcD < o3F)
+                                    if (imcD > o2I && imcD < o2F)
                                     {
-                                        estadoTxt.Text = o3;
+                                        estadoTxt.Text = o2;
                                     }
                                     else
                                     {
-                                        if (imcD > o4I)
-                                            estadoTxt.Text = o4;
+                                        if (imcD > o3I && imcD < o3F)
+                                        {
+                                            estadoTxt.Text = o3;
+                                        }
+                                        else
+                                        {
+                                            if (imcD > o4I)
+                                                estadoTxt.Text = o4;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            //Formula para diagnosticar la cabeza
-            //Formulo para Diagnosticar cintura
-            String sele = "--Seleccionar--";
-            String masc = "Masculino";
-            String fem = "Femenino";
-            String normal = "Normal";
-            String riesgoA = "Riesgo Alto";
-            String riesgoMA = "Riesgo Muy Alto";
+                //Formula para diagnosticar la cabeza
+                //Formulo para Diagnosticar cintura
+                String sele = "--Seleccionar--";
+                String masc = "Masculino";
+                String fem = "Femenino";
+                String normal = "Normal";
+                String riesgoA = "Riesgo Alto";
+                String riesgoMA = "Riesgo Muy Alto";
 
-            double nM = 94, nF = 80, rMI = 93.99, rMF = 102, raM = 101.99, rFI = 79.99, rFF = 88, raF = 87.99;
-            String genero = sexoCbx.Text;
-            double cin = Convert.ToDouble(cintura);
+                double nM = 94, nF = 80, rMI = 93.99, rMF = 102, raM = 101.99, rFI = 79.99, rFF = 88, raF = 87.99;
+                String genero = sexoCbx.Text;
+                double cin = Convert.ToDouble(cintura);
 
-            if (genero == sele)
-            {
-                MessageBox.Show("No ha seleccionado un genero, por favor ingrese informacion solicitada", "Error", MessageBoxButtons.OK);
-            }
-            else
-            {
-                if (cin < 0)
+                if (genero == sele)
                 {
-                    MessageBox.Show("El valor ingresado no es correcto", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("No ha seleccionado un genero, por favor ingrese informacion solicitada", "Error", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    if (genero == masc && cin > 94 || genero == fem && cin > 80)
+                    if (cin < 0)
                     {
-                        diagCinturaTxt.Text = normal;
+                        MessageBox.Show("El valor ingresado no es correcto", "Error", MessageBoxButtons.OK);
                     }
                     else
                     {
-                        if (genero == masc && cin > 93.99 && cin < 102 ||
-                            genero == fem && cin > 79.99 && cin < 88)
+                        if (genero == masc && cin < nM || genero == fem && cin < nF)
                         {
-                            diagCinturaTxt.Text = riesgoA;
+                            diagCinturaTxt.Text = normal;
                         }
                         else
                         {
-                            if (genero == masc && cin > 109.99 || genero == fem && cin > 87.99)
+                            if (genero == masc && cin > rMI && cin < rMF ||
+                                genero == fem && cin > rFI && cin < rFF)
                             {
-                                diagCinturaTxt.Text = riesgoMA;
+                                diagCinturaTxt.Text = riesgoA;
+                            }
+                            else
+                            {
+                                if (genero == masc && cin > raM || genero == fem && cin > raF)
+                                {
+                                    diagCinturaTxt.Text = riesgoMA;
+                                }
                             }
                         }
                     }
                 }
             }
-
         }
     }
 }
